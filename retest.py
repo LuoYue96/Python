@@ -175,5 +175,71 @@ for i in int(var1[1]):
 tmp1, tmp2 = 0
 for i in dict1.keys():
     for j in dict2.keys():
+        
+#HJ20密码验证合格程序
+import re
+while True:
+    try:
+        var = input()
+        tmp = 0
+        if len(var) <= 8:
+            print("NG")
+        else:
+            ret = re.search("[0-9]", var)
+            if ret != None:
+                tmp+=1
+            ret = re.search("[a-z]", var)
+            if ret != None:
+                tmp+=1
+            ret = re.search("[A-Z]", var)
+            if ret != None:
+                tmp+=1
+            ret = re.search("\W", var)
+            if ret != None:
+                tmp+=1
+            for j in range(0,len(var)-3):
+                tmp2 = var[j]+var[j+1]+var[j+2]
+                if var.count(tmp2) >=2:
+                    tmp = 0
+            if tmp >=3:
+                print("OK")
+            else:
+                print("NG")
+    except:
+        break
 
+#HJ21简单密码
+#自创---在判断是否为大小写时用的时ASCII 太过费劲，python有isupper判断
+# var = input()
+# dictA = {'abc':2,'def':3,'ghi':4,'jkl':5,'mno':6,'pqrs':7,'tuv':8,'wxyz':9}
+# for i in var:
+#     if ord(i) in range(65,91):
+#         if i == 'Z':
+#             print('a',end='')
+#         else:
+#             print(chr(ord(i.lower())+1),end='')
+#     elif ord(i) in range(97,123):
+#         for j in dictA.keys():
+#             if i in j:
+#                 print(dictA[j],end='')
+#     else:
+#         print(i,end='')
 
+#HJ22汽水瓶
+# while True:
+#     var = int(input("input num"))
+#     if var == 0:
+#         break
+#     else:
+#         tmp=0
+#         while var // 3 != 0 :
+#             tmp += var // 3
+#             var = var //3 + var % 3
+#         else:
+#             if var == 2 :
+#                 tmp+=1
+#                 print(tmp)
+#                 break
+#             else:
+#                 print(tmp)
+#                 break
