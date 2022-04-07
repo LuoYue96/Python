@@ -243,3 +243,40 @@ while True:
 #             else:
 #                 print(tmp)
 #                 break
+
+#HJ23删除字符串中出现次数最少的字符
+#该方法较笨，没有使用dict存储，纯手动处理
+var = input()  #用于接收输入
+var2 = set(var)    #对接收到的string进行去重
+tmp =var.count(var[0])    #取string的第一个字符出现次数作为计数器首个数字
+tmp2=''            #用于存储出现次数最少的字符
+for i in var2:       
+        if tmp > var.count(i):    #如果遍历到的字符出现次数小，即tmp更新
+        tmp=var.count(i)
+        tmp2=i                #tmp2更新为次数最小的字符
+    elif tmp == var.count(i):    #如果出现次数均最小，即tmp2添加该字符
+        tmp2+=i
+for i in var:                    #遍历原始输入字符串
+    if i not in tmp2:        #如果字符不属于tmp2（出现次数最小字符串中），即输出
+        print(i,end='')
+
+#HJ27 查找兄弟单词
+list1 = input().split()
+#单词查询范围 list[1:-2]   目标单词des = list[-2]  输出第list[-1]
+list2 = []          #用于存储兄弟单词
+des=str(list1[-2])      #用于存储目标单词
+for i in list1[1:-2]:       #遍历匹配的单词池
+    #通过长度和字符串是否与des一致来删选一部分
+    if i != list1[-2] and len(i) == len(list1[-2]):
+        tmp=des             #临时变量用于接下来的删减操作
+        for j in i:         #遍历筛选后的单词字符串
+            if j in tmp:                    #如果遍历的字符存在目标字符中
+                tmp=tmp.replace(j,'',1)    
+                #在目标字符中删去匹配到的一个，这样操作是为了以防出多个相同字符
+        if len(tmp) == 0:           #tmp长度为0则代表全部匹配成功，是兄弟单词
+            list2.append(i)         #存储兄弟单词
+print(len(list2))                   #输出兄弟单词的个数 即list2的长度
+if len(list2) > int(list1[-1]):     
+#判断兄弟单词的个数 是否包括想要输出的序号 如果超出则不输出
+    list2=sorted(list2)             #对兄弟单词列表进行排序
+    print(list2[int(list1[-1])-1])  #输出目标序号的兄弟单词
