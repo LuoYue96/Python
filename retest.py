@@ -280,3 +280,66 @@ if len(list2) > int(list1[-1]):
 #判断兄弟单词的个数 是否包括想要输出的序号 如果超出则不输出
     list2=sorted(list2)             #对兄弟单词列表进行排序
     print(list2[int(list1[-1])-1])  #输出目标序号的兄弟单词
+
+   
+#HJ29字符串加解密
+#原始人方法，简单逻辑往里怼
+#将一些特殊的转换提前存入字典，方便接下来进行映射解析
+dictT={'z':'A','Z':'a','9':'0'}        #加密用      
+dictrT={'A':'z','a':'Z','0':'9'}        #解密用
+s = input()       
+s_r = ''                #用于存储加密输出
+r=''                        #用于存储解密输出
+rs = input()
+for i in s:                        #加密过程，不解释。。应套逻辑
+    if i in dictT.keys():            #先从那几个特殊的下手排查 z Z 9
+        s_r+=(dictT[i])
+    elif i.isdigit():
+        s_r+=str((int(i)+1))
+    elif i.islower():
+        s_r+=(chr(ord(i.upper())+1))
+    elif i.isupper():
+        s_r+=(chr(ord(i.lower())+1))
+    else:
+        s_r+=(i)
+for j in rs:                        #解密过程，依然硬套逻辑 从特殊的开始反转
+    if j in dictrT.keys():
+        r+=(dictrT[j])
+    elif j.isdigit():
+        r+=str((int(j)-1))
+    elif j.islower():
+        r+=(chr(ord(j.upper())-1))
+    elif j.isupper():
+        r+=(chr(ord(j.lower())-1))
+    else:
+        r+=(j)
+print(s_r)
+print(r)
+
+#HJ31单词倒排
+a = input()
+tmp = ""        #用于存储转义后的字符串
+count=0            #用于计数 计相邻字符是否均为单词间隔符
+for i in a:        #遍历输入的字符串
+    if i.islower():        #首先判断是否为小写字母
+        tmp += i
+        count=0            #如果该字符是单词字符，则对计数器进行归0操作
+    elif i.isupper():        #其次判断是否为大写字母
+        tmp += i
+        count=0   
+    else:                    #以下判断为单词间隔符
+        count+=1            #计数器+1
+        if count == 1 :    #当计数器为1时才转换成空格，计数器为0则代表当前字符为单词字符，大于1则代表相邻的两个或多个字符均为单词间隔符
+            tmp+=' '    
+lista = tmp.split()                #将字符串按空格切割转换成列表
+for i in lista[::-1]:            #列表逆序切片输出
+    print(i,end=' ')
+
+#HJ34 图片整理
+var = input()
+for i in sorted(var):
+    print(i,end='')
+#一行解决  print(''.join(sorted(input())))
+
+
+
