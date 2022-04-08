@@ -341,5 +341,46 @@ for i in sorted(var):
     print(i,end='')
 #一行解决  print(''.join(sorted(input())))
 
+#HJ35蛇形矩阵
+找到值与行列的关系，即 value=(i+j-2)*(i+j-1)/2+j，i，j是所属行与列。然后判定换行的时机，即j=N-i+1时，所属行已排满，换行
+while True:
+    try:
+        m = int(input())
+        for i in range(1, m + 1):
+            for j in range(1, m - i + 2):
+                if j == m - i + 1:
+                    print((i + j - 2) * (i + j - 1) // 2 + j)
+                else:
+                    print((i + j - 2) * (i + j - 1) // 2 + j, end=' ')
+    except:
+        break
 
+HJ37 统计每个月兔子的总数
+斐波那契数列：1 1 2 3 5 8 13 21 34 f(n)=f(n-1)+f(n-2) n>2,n从0开始
+递归法：
+while True:
+    try:
+        month=int(input())
+        n=month-1
+        def func(n):
+            if n<2:#基线条件
+                return 1
+            else:#递归条件
+                return func(n-1)+func(n-2)
+        print(func(n))
+    except:
+        break
+2.循环列表
+import sys
+for s in sys.stdin:#s=input()读入数据的1行
+    month=int(s)
+    L=[]
+    for i in range(month):
+        if i<2:#前两个月都为1
+            total=1
+            L.append(total)
+        else:
+            total=L[i-1]+L[i-2]#之后均为前两个数的和
+            L.append(total)
+    print(L[-1])#最后的列表L=[1, 1, 2, 3, 5, 8, 13, 21, 34]
 
